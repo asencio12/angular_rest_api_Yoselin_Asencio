@@ -1,0 +1,45 @@
+<mat-toolbar class="header">
+  <a class="brand" routerLink="/" aria-label="Ir al inicio">
+    <mat-icon>explore</mat-icon>
+    <span class="brand-name">Explorador</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <!-- Navegación para tabletas y computadoras -->
+  <nav class="nav-desktop" aria-label="Navegación principal">
+    @for (item of items; track item.path) {
+      <a
+        mat-button
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <button
+    mat-icon-button
+    type="button"
+    (click)="theme.toggle()"
+    [attr.aria-label]="theme.isDark() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+  >
+    <mat-icon>{{ theme.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <!-- Menú desplegable para teléfonos -->
+  <button mat-icon-button type="button" class="menu-btn" [matMenuTriggerFor]="menu" aria-label="Abrir menú">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (item of items; track item.path) {
+      <a mat-menu-item [routerLink]="item.path">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </mat-menu>
+</mat-toolbar>

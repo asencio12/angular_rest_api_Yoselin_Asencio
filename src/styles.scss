@@ -1,1 +1,42 @@
-git remote add origin https://github.com/asencio12/angular_rest_api_Yoselin_Asencio.git/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Tema Angular Material 3: violeta (primary) + naranja (tertiary).
+// `theme-type: color-scheme` genera colores claro y oscuro a la vez;
+// cuál se usa depende de la propiedad CSS `color-scheme` de <html>.
+html {
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: color-scheme,
+        primary: mat.$violet-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+// Tema oscuro: la clase la pone ThemeService en <html>
+html.dark-theme {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-family: var(--mat-sys-body-large-font), sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: inherit;
+}
