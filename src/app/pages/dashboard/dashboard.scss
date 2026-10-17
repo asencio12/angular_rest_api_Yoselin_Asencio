@@ -1,0 +1,31 @@
+.hero {
+  margin-bottom: 32px;
+
+  h1 {
+    margin: 0 0 8px;
+    font: var(--mat-sys-display-small);
+    background: linear-gradient(90deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  p {
+    margin: 0;
+    max-width: 62ch;
+    font: var(--mat-sys-body-large);
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font: var(--mat-sys-headline-medium);
+  }
+}

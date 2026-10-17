@@ -43,7 +43,7 @@ export class ThemeService {
         return saved;
       }
     } catch {
-      // se ignora
+      
     }
     const prefersDark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
     return prefersDark ? 'dark' : 'light';

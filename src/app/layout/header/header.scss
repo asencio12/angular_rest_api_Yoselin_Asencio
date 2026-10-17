@@ -1,21 +1,42 @@
 .header {
-  --mat-toolbar-container-background-color: var(--mat-sys-primary-container);
-  --mat-toolbar-container-text-color: var(--mat-sys-on-primary-container);
+  // Colores del header (rojo con texto blanco)
+  --header-bg: #282728fb;
+  --header-fg: #1fc55f;
+
+  --mat-toolbar-container-background-color: var(--header-bg);
+  --mat-toolbar-container-text-color: var(--header-fg);
+  --mat-button-text-label-text-color: var(--header-fg);
+  --mat-button-text-label-text-weight: 700;
+  --mat-button-text-state-layer-color: var(--header-fg);
+  --mat-button-text-ripple-color: color-mix(in srgb, var(--header-fg) 20%, transparent);
+  --mat-icon-button-icon-color: var(--header-fg);
+  --mat-icon-button-state-layer-color: var(--header-fg);
+  --mat-icon-button-ripple-color: color-mix(in srgb, var(--header-fg) 20%, transparent);
 
   position: sticky;
   top: 0;
   z-index: 10;
   gap: 4px;
+  font-weight: 700;
   box-shadow: var(--mat-sys-level2);
+}
+
+// En tema oscuro el rojo es más profundo
+:host-context(.dark-theme) .header {
+  --header-bg: #3e4e7d;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  color: var(--header-fg);
   text-decoration: none;
-  font-size: 1.25rem;
-  font-weight: 500;
+
+  mat-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+  }
 }
 
 .spacer {
@@ -27,8 +48,12 @@
   align-items: center;
   gap: 4px;
 
+  a {
+    text-decoration: none;
+  }
+
   a.active {
-    background: color-mix(in srgb, currentColor 16%, transparent);
+    background: color-mix(in srgb, var(--header-fg) 22%, transparent);
   }
 }
 
@@ -41,7 +66,6 @@
   .nav-desktop {
     display: none;
   }
-
   .menu-btn {
     display: inline-flex;
   }

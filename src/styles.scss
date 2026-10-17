@@ -1,8 +1,4 @@
 @use '@angular/material' as mat;
-
-// Tema Angular Material 3: violeta (primary) + naranja (tertiary).
-// `theme-type: color-scheme` genera colores claro y oscuro a la vez;
-// cuál se usa depende de la propiedad CSS `color-scheme` de <html>.
 html {
   color-scheme: light;
 
@@ -13,13 +9,18 @@ html {
         primary: mat.$violet-palette,
         tertiary: mat.$orange-palette,
       ),
-      typography: Roboto,
+            typography: (
+        plain-family: 'Poppins, sans-serif',
+        brand-family: 'Poppins, sans-serif',
+        bold-weight: 700,
+        medium-weight: 600,
+        regular-weight: 400,
+      ),
       density: 0,
     )
   );
 }
 
-// Tema oscuro: la clase la pone ThemeService en <html>
 html.dark-theme {
   color-scheme: dark;
 }

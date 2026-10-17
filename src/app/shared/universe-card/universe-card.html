@@ -1,0 +1,32 @@
+<a
+  class="card-link"
+  [routerLink]="universe().path"
+  [attr.aria-label]="'Explorar personajes de ' + universe().name"
+  [style.--accent]="universe().accent"
+  [style.animation-delay.ms]="index() * 90"
+>
+  <mat-card appearance="outlined" class="card">
+    <img
+      mat-card-image
+      class="cover"
+      [src]="universe().image"
+      [alt]="'Imagen de ' + universe().name"
+      referrerpolicy="no-referrer"
+      loading="lazy"
+    />
+    <mat-card-header>
+      <div mat-card-avatar class="badge">
+        <mat-icon>{{ universe().icon }}</mat-icon>
+      </div>
+      <mat-card-title>{{ universe().name }}</mat-card-title>
+      <mat-card-subtitle>{{ universe().tagline }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ universe().description }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <span class="cta">
+      </span>
+    </mat-card-actions>
+  </mat-card>
+</a>
