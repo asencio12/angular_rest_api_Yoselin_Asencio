@@ -1,0 +1,54 @@
+.head {
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 6px solid var(--mat-sys-primary);
+
+  h1 {
+    margin: 0;
+    font: var(--mat-sys-headline-large);
+    font-weight: 700;
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 16px;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+
+  mat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+mat-paginator {
+  margin-top: 24px;
+  border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}

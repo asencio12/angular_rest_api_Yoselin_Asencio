@@ -8,7 +8,7 @@
   --mat-button-text-label-text-color: var(--header-fg);
   --mat-button-text-label-text-weight: 700;
   --mat-button-text-state-layer-color: var(--header-fg);
-  --mat-button-text-ripple-color: color-mix(in srgb, var(--header-fg) 20%, transparent);
+  --mat-button-text-ripple-color: color-mix(in srgb, var(--header-fg) %, transparent);
   --mat-icon-button-icon-color: var(--header-fg);
   --mat-icon-button-state-layer-color: var(--header-fg);
   --mat-icon-button-ripple-color: color-mix(in srgb, var(--header-fg) 20%, transparent);
@@ -19,6 +19,9 @@
   gap: 4px;
   font-weight: 700;
   box-shadow: var(--mat-sys-level2);
+}
+.nav-desktop mat-icon {
+  color: #ffeb3b;
 }
 
 // En tema oscuro el rojo es más profundo
@@ -32,10 +35,15 @@
   color: var(--header-fg);
   text-decoration: none;
 
-  mat-icon {
+.header .theme-btn {
+ --mat-icon-button-state-layer-size: 56px;
+ --mat-icon-button-icon-size: 32px;
+
+   mat-icon {
     width: 32px;
     height: 32px;
     font-size: 32px;
+   }
   }
 }
 

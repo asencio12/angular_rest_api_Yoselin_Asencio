@@ -1,0 +1,31 @@
+<mat-card appearance="outlined" class="card">
+  <button
+    type="button"
+    class="image-btn"
+    (click)="openImage()"
+    [attr.aria-label]="'Ampliar imagen de ' + character().name"
+  >
+    @if (character().image && !imageFailed()) {
+      <img
+        class="image"
+        [src]="character().image"
+        [alt]="character().name"
+        referrerpolicy="no-referrer"
+        loading="lazy"
+        (error)="imageFailed.set(true)"
+      />
+    } @else {
+      <mat-icon class="placeholder">image_not_supported</mat-icon>
+    }
+    <span class="zoom"><mat-icon>zoom_in</mat-icon></span>
+  </button>
+
+  <a class="info" [routerLink]="[detailPath(), character().id]" [attr.aria-label]="'Ver detalle de ' + character().name">
+    <span class="id">#{{ character().id }}</span>
+    <span class="name">{{ character().name }}</span>
+    <span class="more">
+      Ver detalle
+      <mat-icon>arrow_forward</mat-icon>
+    </span>
+  </a>
+</mat-card>

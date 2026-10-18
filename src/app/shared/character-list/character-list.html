@@ -1,0 +1,43 @@
+<header class="head">
+  <h1>{{ title() }}</h1>
+  @if (!error() && total() > 0) {
+    <p>{{ total() }} personajes</p>
+  }
+</header>
+
+@if (loading()) {
+  <div class="state" role="status">
+    <mat-spinner diameter="48" />
+    <p>Cargando personajes...</p>
+  </div>
+} @else if (error()) {
+  <div class="state" role="alert">
+    <mat-icon>error_outline</mat-icon>
+    <p>No se pudieron cargar los personajes.</p>
+    <button mat-flat-button type="button" (click)="retry.emit()">Reintentar</button>
+  </div>
+} @else if (characters().length === 0) {
+  <div class="state">
+    <mat-icon>search_off</mat-icon>
+    <p>No hay personajes para mostrar.</p>
+  </div>
+} @else {
+  <div class="grid">
+    @for (character of characters(); track character.id) {
+      <app-character-card [character]="character" [detailPath]="detailPath()" />
+    }
+  </div>
+}
+
+@if (!error() && total() > 0) {
+  <mat-paginator
+    [length]="total()"
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize()"
+    [pageSizeOptions]="pageSizeOptions()"
+    [disabled]="loading()"
+    [showFirstLastButtons]="true"
+    (page)="pageChange.emit($event)"
+    aria-label="Paginación de personajes"
+  />
+}

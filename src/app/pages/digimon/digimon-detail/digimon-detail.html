@@ -1,0 +1,103 @@
+<a mat-button class="back" routerLink="/digimon">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (loading()) {
+  <div class="state" role="status">
+    <mat-spinner diameter="48" />
+    <p>Cargando detalle...</p>
+  </div>
+} @else if (error() || !digimon()) {
+  <div class="state" role="alert">
+    <mat-icon>error_outline</mat-icon>
+    <p>No se pudo cargar este Digimon.</p>
+    <button mat-flat-button type="button" (click)="retry()">Reintentar</button>
+  </div>
+} @else {
+  @let d = digimon()!;
+
+  <mat-card appearance="outlined" class="detail">
+    <div class="media">
+      @if (image() && !imageFailed()) {
+        <img [src]="image()" [alt]="d.name" referrerpolicy="no-referrer" (error)="imageFailed.set(true)" />
+      } @else {
+        <mat-icon class="placeholder">image_not_supported</mat-icon>
+      }
+    </div>
+
+    <div class="content">
+      <p class="id">#{{ d.id }}</p>
+      <h1>{{ d.name }}</h1>
+
+      @if (d.xAntibody) {
+        <mat-chip-set aria-label="Variante">
+          <mat-chip>X-Antibody</mat-chip>
+        </mat-chip-set>
+      }
+
+      @for (group of groups(); track group.label) {
+        <section class="group">
+          <h2>{{ group.label }}</h2>
+          <mat-chip-set [attr.aria-label]="group.label">
+            @for (value of group.values; track value) {
+              <mat-chip>{{ value }}</mat-chip>
+            }
+          </mat-chip-set>
+        </section>
+      }
+
+      @if (d.releaseDate) {
+        <section class="group">
+          <h2>Año de lanzamiento</h2>
+          <p>{{ d.releaseDate }}</p>
+        </section>
+      }
+
+      @if (description()) {
+        <section class="group">
+          <h2>Descripción</h2>
+          <p class="text">{{ description() }}</p>
+        </section>
+      }
+
+      @if (d.skills?.length) {
+        <section class="group">
+          <h2>Habilidades</h2>
+          <ul class="skills">
+            @for (skill of d.skills; track skill.id ?? skill.skill) {
+              <li>
+                <strong>{{ skill.skill }}</strong>
+                @if (skill.translation) {
+                  <span class="translation">({{ skill.translation }})</span>
+                }
+                @if (skill.description) {
+                  <p>{{ skill.description }}</p>
+                }
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </div>
+  </mat-card>
+
+  @for (group of evolutions(); track group.label) {
+    <section class="evolutions">
+      <h2>{{ group.label }}</h2>
+      <div class="evo-grid">
+        @for (evo of group.items; track $index) {
+          <a class="evo" [routerLink]="['/digimon', evo.id]" [attr.title]="evo.condition || evo.digimon">
+            @if (evo.image) {
+              <img [src]="evo.image" [alt]="evo.digimon" referrerpolicy="no-referrer" loading="lazy" />
+            }
+            <span class="evo-name">{{ evo.digimon }}</span>
+            @if (evo.condition) {
+              <span class="evo-condition">{{ evo.condition }}</span>
+            }
+          </a>
+        }
+      </div>
+    </section>
+  }
+}

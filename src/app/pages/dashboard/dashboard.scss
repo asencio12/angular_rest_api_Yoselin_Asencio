@@ -1,18 +1,17 @@
 .hero {
   margin-bottom: 32px;
+  padding-left: 16px;
+  border-left: 6px solid var(--mat-sys-primary);
 
   h1 {
-    margin: 0 0 8px;
-    font: var(--mat-sys-display-small);
-    background: linear-gradient(90deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    margin: 0 0 4px;
+    font: var(--mat-sys-headline-large);
+    font-weight: 700;
+    color: var(--mat-sys-on-surface);
   }
 
   p {
     margin: 0;
-    max-width: 62ch;
     font: var(--mat-sys-body-large);
     color: var(--mat-sys-on-surface-variant);
   }
@@ -22,10 +21,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
-}
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font: var(--mat-sys-headline-medium);
-  }
 }
