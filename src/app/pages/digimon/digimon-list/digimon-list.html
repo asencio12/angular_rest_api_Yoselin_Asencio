@@ -1,12 +1,1 @@
-<app-character-list
-  title="Digimon"
-  detailPath="/digimon"
-  [characters]="characters()"
-  [total]="total()"
-  [pageIndex]="pageIndex()"
-  [pageSize]="pageSize()"
-  [loading]="loading()"
-  [error]="error()"
-  (pageChange)="onPageChange($event)"
-  (retry)="load()"
-/>
+<app-character-browser title="Digimon" detailPath="/digimon" [loader]="loader" />

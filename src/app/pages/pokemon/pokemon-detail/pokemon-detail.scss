@@ -1,0 +1,67 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+.photo {
+  width: 100%;
+  padding: 12px;
+  object-fit: contain;
+  background: var(--mat-sys-surface-container);
+  border-radius: 12px;
+}
+
+.id {
+  margin: 0;
+  font-weight: 600;
+  color: var(--mat-sys-primary);
+}
+
+h1 {
+  margin: 0 0 12px;
+}
+
+.name,
+.tag,
+.stat-name {
+  text-transform: capitalize;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 2px 12px;
+  border-radius: 16px;
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 150px 1fr 40px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+// En el teléfono la imagen va arriba y los datos abajo
+@media (max-width: 800px) {
+  .detail {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    grid-template-columns: 110px 1fr 36px;
+  }
+}

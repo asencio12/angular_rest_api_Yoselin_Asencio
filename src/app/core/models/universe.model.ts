@@ -1,4 +1,4 @@
-export type UniverseId = 'digimon'  |   'dragon-ball' | 'pokemon' | 'demon-slayer'    ;
+export type UniverseId =  'digimon'  |   'dragon-ball' | 'pokemon' | 'demon-slayer'    ;
 
 /* Datos de presentación de cada universo (dashboard, header y rutas). */
 export interface Universe {

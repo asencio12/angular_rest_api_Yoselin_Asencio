@@ -1,0 +1,63 @@
+<a mat-button routerLink="/pokemon">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (loading()) {
+  <div class="message">
+    <mat-spinner diameter="48" />
+    <p>Cargando detalle...</p>
+  </div>
+} @else if (error()) {
+  <p class="message">No se pudo cargar este Pokémon.</p>
+} @else if (pokemon(); as p) {
+  <mat-card appearance="outlined" class="detail">
+    <img class="photo" [src]="image()" [alt]="p.name" />
+
+    <div>
+      <p class="id">#{{ p.id }}</p>
+      <h1 class="name">{{ p.name }}</h1>
+
+      <p><strong>Altura:</strong> {{ p.height / 10 }} m</p>
+      <p><strong>Peso:</strong> {{ p.weight / 10 }} kg</p>
+
+      @if (p.base_experience) {
+        <p><strong>Experiencia base:</strong> {{ p.base_experience }}</p>
+      }
+
+      @if (p.types.length) {
+        <p>
+          <strong>Tipos:</strong>
+          @for (item of p.types; track item.slot) {
+            <span class="tag">{{ item.type.name }}</span>
+          }
+        </p>
+      }
+
+      @if (p.abilities.length) {
+        <p>
+          <strong>Habilidades:</strong>
+          @for (item of p.abilities; track item.ability.name) {
+            <span class="tag">
+              {{ item.ability.name }}
+              @if (item.is_hidden) {
+                (oculta)
+              }
+            </span>
+          }
+        </p>
+      }
+
+      @if (p.stats.length) {
+        <h2>Estadísticas base</h2>
+        @for (item of p.stats; track item.stat.name) {
+          <div class="stat">
+            <span class="stat-name">{{ item.stat.name }}</span>
+            <mat-progress-bar mode="determinate" [value]="item.base_stat / 2.55" />
+            <span>{{ item.base_stat }}</span>
+          </div>
+        }
+      }
+    </div>
+  </mat-card>
+}

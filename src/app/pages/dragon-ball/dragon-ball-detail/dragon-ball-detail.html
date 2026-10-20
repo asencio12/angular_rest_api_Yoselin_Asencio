@@ -1,0 +1,93 @@
+<a mat-button class="back" routerLink="/dragon-ball">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (loading()) {
+  <div class="state" role="status">
+    <mat-spinner diameter="48" />
+    <p>Cargando detalle...</p>
+  </div>
+} @else if (error() || !character()) {
+  <div class="state" role="alert">
+    <mat-icon>error_outline</mat-icon>
+    <p>No se pudo cargar este personaje.</p>
+    <button mat-flat-button type="button" (click)="retry()">Reintentar</button>
+  </div>
+} @else {
+  @let c = character()!;
+
+  <mat-card appearance="outlined" class="detail">
+    <div class="media">
+      @if (c.image && !imageFailed()) {
+        <img [src]="c.image" [alt]="c.name" referrerpolicy="no-referrer" (error)="imageFailed.set(true)" />
+      } @else {
+        <mat-icon class="placeholder">image_not_supported</mat-icon>
+      }
+    </div>
+
+    <div class="content">
+      <p class="id">#{{ c.id }}</p>
+      <h1>{{ c.name }}</h1>
+
+      @if (facts().length) {
+        <dl class="facts">
+          @for (fact of facts(); track fact.label) {
+            <div class="fact">
+              <dt>{{ fact.label }}</dt>
+              <dd>{{ fact.value }}</dd>
+            </div>
+          }
+        </dl>
+      }
+
+      @if (c.description) {
+        <section class="group">
+          <h2>Descripción</h2>
+          <p class="text">{{ c.description }}</p>
+        </section>
+      }
+    </div>
+  </mat-card>
+
+  @if (c.originPlanet; as planet) {
+    <section class="block">
+      <h2>Planeta de origen</h2>
+      <mat-card appearance="outlined" class="planet">
+        @if (planet.image) {
+          <img class="planet-img" [src]="planet.image" [alt]="planet.name" referrerpolicy="no-referrer" loading="lazy" />
+        }
+        <div class="planet-info">
+          <h3>{{ planet.name }}</h3>
+          @if (planet.isDestroyed) {
+            <mat-chip-set aria-label="Estado del planeta">
+              <mat-chip>Planeta destruido</mat-chip>
+            </mat-chip-set>
+          }
+          @if (planet.description) {
+            <p>{{ planet.description }}</p>
+          }
+        </div>
+      </mat-card>
+    </section>
+  }
+
+  @if (c.transformations?.length) {
+    <section class="block">
+      <h2>Transformaciones</h2>
+      <div class="forms">
+        @for (form of c.transformations; track $index) {
+          <mat-card appearance="outlined" class="form">
+            @if (form.image) {
+              <img [src]="form.image" [alt]="form.name" referrerpolicy="no-referrer" loading="lazy" />
+            }
+            <span class="form-name">{{ form.name }}</span>
+            @if (form.ki) {
+              <span class="form-ki">Ki: {{ form.ki }}</span>
+            }
+          </mat-card>
+        }
+      </div>
+    </section>
+  }
+}

@@ -7,9 +7,6 @@ const STORAGE_KEY = 'theme-mode';
 
 /**
  * Controla el tema claro/oscuro.
- * - Lee la preferencia guardada o, si no hay, la del sistema operativo.
- * - Aplica la clase `dark-theme` / `light-theme` en <html>.
- * - Guarda la elección en localStorage.
  */
 @Injectable({ providedIn: 'root' })
 export class ThemeService {

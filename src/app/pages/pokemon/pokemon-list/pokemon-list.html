@@ -1,0 +1,11 @@
+<app-character-list
+  title="Pokémon"
+  detailPath="/pokemon"
+  [characters]="characters()"
+  [total]="total()"
+  [pageIndex]="pageIndex()"
+  [pageSize]="pageSize()"
+  [loading]="loading()"
+  [error]="error()"
+  (pageChange)="onPageChange($event)"
+/>
