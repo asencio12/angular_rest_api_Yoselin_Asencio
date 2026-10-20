@@ -1,0 +1,70 @@
+<a mat-button routerLink="/demon-slayer">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (loading()) {
+  <div class="message">
+    <mat-spinner diameter="48" />
+    <p>Cargando detalle...</p>
+  </div>
+} @else if (error()) {
+  <p class="message">No se pudo cargar este personaje.</p>
+} @else if (character(); as c) {
+  <mat-card appearance="outlined" class="detail">
+    <img class="photo" [src]="c.img" [alt]="c.name" />
+
+    <div>
+      <p class="id">#{{ c.id }}</p>
+      <h1>{{ c.name }}</h1>
+
+      @if (c.age) {
+        <p><strong>Edad:</strong> {{ c.age }}</p>
+      }
+      @if (c.gender) {
+        <p><strong>Género:</strong> {{ c.gender }}</p>
+      }
+      @if (c.race) {
+        <p><strong>Raza:</strong> {{ c.race }}</p>
+      }
+      @if (c.description) {
+        <h2>Descripción</h2>
+        <p>{{ c.description }}</p>
+      }
+      @if (c.quote) {
+        <blockquote>“{{ c.quote }}”</blockquote>
+      }
+    </div>
+  </mat-card>
+
+  @if (c.affiliation) {
+    <h2>Afiliación</h2>
+    <mat-card appearance="outlined" class="info-card">
+      <h3>{{ c.affiliation.name }}</h3>
+      <p>{{ c.affiliation.description }}</p>
+    </mat-card>
+  }
+
+  @if (c.first_arc_appearance) {
+    <h2>Primera aparición</h2>
+    <mat-card appearance="outlined" class="info-card">
+      <h3>{{ c.first_arc_appearance.name }}</h3>
+      <p>{{ c.first_arc_appearance.description }}</p>
+    </mat-card>
+  }
+
+  @if (c.combat_style?.length) {
+    <h2>Estilos de combate</h2>
+    <div class="styles">
+      @for (style of c.combat_style; track style.id) {
+        <mat-card appearance="outlined" class="style">
+          <img [src]="style.img" [alt]="style.name" />
+          <h3>{{ style.name }}</h3>
+          <p>{{ style.description }}</p>
+        </mat-card>
+      }
+    </div>
+  }
+} @else {
+  <p class="message">No se encontró este personaje.</p>
+}

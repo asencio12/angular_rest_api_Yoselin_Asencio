@@ -6,6 +6,10 @@ import { DragonBallDetail } from './pages/dragon-ball/dragon-ball-detail/dragon-
 import { DragonBallList } from './pages/dragon-ball/dragon-ball-list/dragon-ball-list';
 import { PokemonDetail } from './pages/pokemon/pokemon-detail/pokemon-detail';
 import { PokemonList } from './pages/pokemon/pokemon-list/pokemon-list';
+import { DemonSlayerDetail } from './pages/demon-slayer/demon-slayer-detail/demon-slayer-detail';
+import { DemonSlayerList } from './pages/demon-slayer/demon-slayer-list/demon-slayer-list';
+
+
 
 export const routes: Routes = [
   { path: '', component: Dashboard, title: 'Inicio' },
@@ -15,4 +19,6 @@ export const routes: Routes = [
   { path: 'dragon-ball/:id', component: DragonBallDetail, title: 'Detalle de Dragon Ball Z' },
   { path: 'pokemon', component: PokemonList, title: 'Pokémon' },
   { path: 'pokemon/:id', component: PokemonDetail, title: 'Detalle de Pokémon' },
+  { path: 'demon-slayer', component: DemonSlayerList, title: 'Demon Slayer' },
+  { path: 'demon-slayer/:id', component: DemonSlayerDetail, title: 'Detalle de Demon Slayer' },
 ];
